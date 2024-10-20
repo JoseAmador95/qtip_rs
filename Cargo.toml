@@ -2,5 +2,11 @@
 name = "qtip_rs"
 version = "0.1.0"
 edition = "2021"
+build = "build.rs"
 
 [dependencies]
+cty = "0.2.2"
+
+[build-dependencies]
+bindgen = "0.70.1"
+cmake = "0.1.51"
