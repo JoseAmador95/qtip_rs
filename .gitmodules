@@ -1,0 +1,3 @@
+[submodule "qtip"]
+	path = qtip
+	url = https://github.com/JoseAmador95/QTip.git
