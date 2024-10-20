@@ -30,18 +30,24 @@ fn main() {
         let offset = 3;
         for i in (offset)..(max_elements + offset) {
             let status = qtip_put(&mut context, &i as *const _ as *mut std::ffi::c_void);
-            assert_eq!(status, qtipStatus_t_QTIP_STATUS_OK);
+            assert_eq!(
+                status, qtipStatus_t_QTIP_STATUS_OK,
+                "Expected QTIP_STATUS_OK, got {:?}",
+                status
+            );
         }
         qtip_get_front(&mut context, &element as *const _ as *mut std::ffi::c_void);
         println!("Element at front: {}", element);
+        assert_eq!(element, offset);
 
         qtip_get_rear(&mut context, &element as *const _ as *mut std::ffi::c_void);
         println!("Element at rear: {}", element);
+        assert_eq!(element, max_elements + offset - 1);
 
         let status = qtip_put(&mut context, &element as *const _ as *mut std::ffi::c_void);
         assert_eq!(
-            status, qtipStatus_t_QTIP_STATUS_OK,
-            "Expected QTIP_STATUS_OK, got {:?}",
+            status, qtipStatus_t_QTIP_STATUS_FULL,
+            "Expected QTIP_STATUS_FULL, got {:?}",
             status
         );
     }
